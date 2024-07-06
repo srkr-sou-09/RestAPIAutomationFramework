@@ -4,28 +4,30 @@ package airlines;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import utils.RestUtils;
+import restUtils.RestUtils;
+import utils.JsonUtils;
 
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
-public class AirlineTests {
+public class AirlineTests extends AirlineAPIs {
 
     @Test
-    public void createAirline(){
-       String endpoint = "https://api.instantwebtools.net/v1/airlines";
-       String payLoad  = "{\n" +
-               "    \"_id\":\"252d3bca-d9bb-476c-9a97-562d685e235c\",\n" +
-               "    \"name\": \"Sri Lankan Airways\",\n" +
-               "    \"country\": \"Sri Lanka\",\n" +
-               "    \"logo\": \"https://upload.wikimedia.org/wikipedia/en/thumb/9/9b/Qatar_Airways_Logo.svg/sri_lanka.png\",\n" +
-               "    \"slogan\": \"From Sri Lanka\",\n" +
-               "    \"head_quaters\": \"Katunayake, Sri Lanka\",\n" +
-               "    \"website\": \"www.srilankaaairways.com\",\n" +
-               "    \"established\": \"1990\"\n" +
-               "}";
+    public void createAirline() throws IOException {
 
-        Response response = RestUtils.performPost(endpoint,payLoad,new HashMap<>());
+        Map payLoad = Payloads.getCreateAirLinePayloadFromMap("252d3bca-d9bb-476c-9a97-562d685e235c",
+                "Sri Lankan Airways",
+                "Sri Lanka",
+                "https://upload.wikimedia.org/wikipedia/en/thumb/9/9b/Qatar_Airways_Logo.svg/sri_lanka.png",
+                "From Sri Lanka",
+                "Katunayake, Sri Lanka",
+                "www.srilankaaairways.com",
+                "1990");
+
+        Response response = createAirline(payLoad);
         Assert.assertEquals(response.getStatusCode(), 200);
     }
+
 
 }
