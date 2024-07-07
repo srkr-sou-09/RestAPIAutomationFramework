@@ -10,6 +10,10 @@
             <class name="airlines.AirlineTests">
                 <methods>
                     <include name="createAirline"/>
+                    <include name="createAirlineUsingPojo"/>
+                    <include name="createAirlineUsingPojoBuilder"/>
+                    <include name="createsAirlneAndValidateResponse"/>
+                    <include name="createAirlineAndVerfiyResponse"/>
                 </methods>
             </class>
         </classes>

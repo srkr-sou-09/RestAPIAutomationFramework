@@ -1,13 +1,14 @@
 package airlines;
 
+import airlines.pojos.Airline;
 import net.datafaker.Faker;
 import org.apache.commons.lang3.RandomStringUtils;
+import utils.DateUtils;
 import utils.RandomDataGenrator;
 import utils.RandomDataTypeEnums;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 public class Payloads {
     public static String getCreateAirLinePayloadFromString(String id, String name, String country,String logo,
@@ -52,13 +53,31 @@ public class Payloads {
                         + RandomStringUtils.randomAlphanumeric(4)+"-"
                         + RandomStringUtils.randomAlphanumeric(12))    ;
         payload.put("name", RandomDataGenrator.getRandomDataFor(RandomDataTypeEnums.FIRSTNAME));
-        payload.put("country", faker.address().country());
-        payload.put("logo", RandomStringUtils.randomAlphabetic(25));
-        payload.put("slogan", RandomStringUtils.randomAlphabetic(20));
-        payload.put("head_quaters", faker.address().cityName());
-        payload.put("website", "https://"+RandomStringUtils.randomAlphabetic(20)+".com");
-        payload.put("established", faker.number().numberBetween(1900,2024));
+        payload.put("country", RandomDataGenrator.getRandomDataFor(RandomDataTypeEnums.COUNTRY));
+        payload.put("logo", RandomDataGenrator.getRandomAlphabets(25));
+        payload.put("slogan", RandomDataGenrator.getRandomAlphabets(25));
+        payload.put("head_quaters", RandomDataGenrator.getRandomDataFor(RandomDataTypeEnums.CITYNAME));
+        payload.put("website", RandomDataGenrator.gerRandomWebsiteName());
+        payload.put("established", faker.number().numberBetween(1900, DateUtils.getCurrentYear()));
         return payload;
+    }
+
+    public static Airline getCreateAirlinePayloadFromPojo(){
+        return Airline
+                .builder()
+                .id(RandomStringUtils.randomAlphanumeric(8) + "-"
+                        + RandomStringUtils.randomAlphanumeric(4)+"-"
+                        + RandomStringUtils.randomAlphanumeric(4)+"-"
+                        + RandomStringUtils.randomAlphanumeric(4)+"-"
+                        + RandomStringUtils.randomAlphanumeric(12))
+                .name(RandomDataGenrator.getRandomDataFor(RandomDataTypeEnums.FIRSTNAME))
+                .country(RandomDataGenrator.getRandomDataFor(RandomDataTypeEnums.COUNTRY))
+                .logo(RandomDataGenrator.getRandomAlphabets(25))
+                .slogan(RandomDataGenrator.getRandomAlphabets(25))
+                .head_quaters(RandomDataGenrator.getRandomDataFor(RandomDataTypeEnums.CITYNAME))
+                .website(RandomDataGenrator.gerRandomWebsiteName())
+                .established(String.valueOf(RandomDataGenrator.gerRandomNumber(1900, DateUtils.getCurrentYear())))
+                .build();
 
     }
 }

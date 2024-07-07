@@ -1,6 +1,7 @@
 package utils;
 
 import net.datafaker.Faker;
+import org.apache.commons.lang3.RandomStringUtils;
 
 public class RandomDataGenrator {
 
@@ -22,5 +23,21 @@ public class RandomDataGenrator {
                 return "No such data type found";
         }
 
+    }
+
+    public static String getRandomNumber(int count){
+        return faker.number().digits(count);
+    }
+
+    public static int gerRandomNumber(int min, int max){
+        return faker.number().numberBetween(min,max);
+    }
+
+    public static String getRandomAlphabets(int count){
+        return RandomStringUtils.randomAlphabetic(count);
+    }
+
+    public static String gerRandomWebsiteName(){
+        return RandomStringUtils.randomAlphabetic(10)+".com";
     }
 }
