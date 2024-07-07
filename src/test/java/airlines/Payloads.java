@@ -2,6 +2,8 @@ package airlines;
 
 import net.datafaker.Faker;
 import org.apache.commons.lang3.RandomStringUtils;
+import utils.RandomDataGenrator;
+import utils.RandomDataTypeEnums;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -49,7 +51,7 @@ public class Payloads {
                         + RandomStringUtils.randomAlphanumeric(4)+"-"
                         + RandomStringUtils.randomAlphanumeric(4)+"-"
                         + RandomStringUtils.randomAlphanumeric(12))    ;
-        payload.put("name", faker.name().firstName());
+        payload.put("name", RandomDataGenrator.getRandomDataFor(RandomDataTypeEnums.FIRSTNAME));
         payload.put("country", faker.address().country());
         payload.put("logo", RandomStringUtils.randomAlphabetic(25));
         payload.put("slogan", RandomStringUtils.randomAlphabetic(20));
